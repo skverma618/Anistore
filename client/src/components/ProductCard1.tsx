@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 
 interface ProductCardProps {
   image: string;
@@ -7,7 +9,8 @@ interface ProductCardProps {
   price: number;
   originalPrice?: number;
   discount?: number;
-  className?: string
+  className?: string;
+  wishlisted?: boolean
 }
 
 const ProductCard: FC<ProductCardProps> = ({
@@ -17,13 +20,14 @@ const ProductCard: FC<ProductCardProps> = ({
   price,
   originalPrice,
   discount,
-  className
+  className,
+  wishlisted = true,
 }) => {
   return (
     <div className={`group relative cursor-pointer overflow-hidden rounded-lg bg-white shadow-md transition-transform hover:-translate-y-1 ${className}`} >
       {/* Image container */}
       <div className="relative h-80 overflow-hidden">
-        <img 
+        <img
           src={image}
           alt={name}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -35,9 +39,9 @@ const ProductCard: FC<ProductCardProps> = ({
         )}
         {/* Wishlist icon */}
         <span className="absolute right-2 top-2 text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
+          {wishlisted ?
+            <FaHeart className='text-red-600' /> : <FaRegHeart />
+          }
         </span>
         {/* Star rating */}
         <span className="absolute left-2 bottom-2 text-yellow-400">
@@ -51,7 +55,7 @@ const ProductCard: FC<ProductCardProps> = ({
       <div className="p-4">
         <h3 className="text-sm font-medium text-gray-700">{brand}</h3>
         <p className="mt-1 text-sm text-gray-500 line-clamp-2">{name}</p>
-        
+
         <div className="mt-2 flex items-center space-x-2">
           <span className="text-lg font-bold text-gray-900">₹{price}</span>
           {originalPrice && (
