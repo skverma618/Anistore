@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int         @id @default(autoincrement())
+  email        String      @unique
+  password     String
+  profile      UserProfile?
+  orders       Order[]
+  cartItems    CartItem[]
+  wishlist     Wishlist[]
+  comments  Comment[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model UserProfile {
+  id         Int         @id @default(autoincrement())
+  userId     Int         @unique
+  user       User        @relation(fields: [userId], references: [id])
+  firstName  String
+  lastName   String
+  profilePic String?     // URL or path to the profile image
+  addresses  Address[]
+}
+
+model Address {
+  id         Int         @id @default(autoincrement())
+  profileId  Int
+  profile    UserProfile  @relation(fields: [profileId], references: [id])
+  street     String
+  city       String
+  state      String
+  country    String
+  zipCode    String
+  isDefault  Boolean     @default(false) // Marks the default address
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  userId      Int
+  user        User        @relation(fields: [userId], references: [id])
+  orderStatus OrderStatus @default(PENDING)
+  orderItems  OrderItem[]
+  totalAmount Float
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  order     Order    @relation(fields: [orderId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+}
+
+model Product {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  stock       Int
+  sizes       Json           // Example: { "S": 10, "M": 15, "L": 8 }
+  gender      Gender         // male, female, neutral/kids
+  brandId     Int
+  brand       Brand          @relation(fields: [brandId], references: [id])
+  images      ProductImage[]
+  wishlist    Wishlist[]
+  cartItems   CartItem[]
+  categoryId  Int
+  category    Category       @relation(fields: [categoryId], references: [id])
+  animeName   String
+  characterName String?
+  avgRating   Float          @default(0.0)
+  totalRatings Int           @default(0)
+  comments    Comment[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  orderItems  OrderItem[]
+}
+
+model ProductImage {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  url       String
+  order     Int
+  createdAt DateTime @default(now())
+
+  @@unique([productId, order]) // Ensure unique order for product images
+}
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId]) // Ensure a product is only added once to the user's cart
+}
+
+model Wishlist {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId]) // Ensure a product is added only once to the wishlist
+}
+
+model Brand {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  logo    String   // URL to the brand logo
+  products Product[]
+}
+
+model Category {
+  id            Int           @id @default(autoincrement())
+  name          String
+  parentId      Int?
+  parent        Category?      @relation("CategoryParent", fields: [parentId], references: [id])
+  subcategories Category[]     @relation("CategoryParent")
+  products      Product[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  content   String
+  rating    Int      // Example: 1 to 5
+  createdAt DateTime @default(now())
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NEUTRAL
+  KIDS
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
