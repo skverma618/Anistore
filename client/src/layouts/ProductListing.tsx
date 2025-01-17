@@ -6,8 +6,9 @@ import {
     BreadcrumbItem,
     BreadcrumbList,
     BreadcrumbPage,
+    BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+// import { Separator } from "@/components/ui/separator"
 import {
     SidebarInset,
     SidebarProvider,
@@ -19,20 +20,24 @@ const ProductListing = () => {
         <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-                <header className="sticky top-0 flex h-16 shrink-0 items-center gap-2 bg-background px-4"> {/* add class border-b  for border */}
+                <header className="flex h-16 shrink-0 items-center gap-2 bg-background px-4"> {/* add class border-b  for border */}
                     <SidebarTrigger className="-ml-1" />
                     {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
                     <Breadcrumb>
                         <BreadcrumbList>
                             <BreadcrumbItem>
-                                <BreadcrumbPage>Men / Tshirts</BreadcrumbPage>
+                                <BreadcrumbPage> Men </BreadcrumbPage>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator className="hidden md:block" />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage> Tshirts </BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4">
                     <div className="grid auto-rows-min gap-4 md:grid-cols-5">
-                        {Array.from({ length: 20 }).map((_, i) => (
+                        {Array.from({ length: 12 }).map((_, i) => (
                             <ProductCard
                                 name={product.name}
                                 price={product.price}
