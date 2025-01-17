@@ -7,6 +7,7 @@ interface ProductCardProps {
   price: number;
   originalPrice?: number;
   discount?: number;
+  className?: string
 }
 
 const ProductCard: FC<ProductCardProps> = ({
@@ -15,10 +16,11 @@ const ProductCard: FC<ProductCardProps> = ({
   name,
   price,
   originalPrice,
-  discount
+  discount,
+  className
 }) => {
   return (
-    <div className="group relative w-64 cursor-pointer overflow-hidden rounded-lg bg-white shadow-md transition-transform hover:-translate-y-1">
+    <div className={`group relative cursor-pointer overflow-hidden rounded-lg bg-white shadow-md transition-transform hover:-translate-y-1 ${className}`} >
       {/* Image container */}
       <div className="relative h-80 overflow-hidden">
         <img 
