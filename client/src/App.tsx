@@ -1,33 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import ProductCard from "./components/ProductCard1"
+import ProductListing from "./layouts/ProductListing"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const product = {
+    name: "Sample Product",
+    price: 29.99,
+    description: "This is a sample product description."
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ProductCard 
+        name={product.name} 
+        price={product.price} 
+        image="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1736596237_9421843.jpg?format=webp&w=480&dpr=2.0"
+        brand="Souled Store"
+      />
+      <ProductListing />
     </>
   )
 }
