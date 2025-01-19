@@ -1,5 +1,6 @@
-import Navbar from "./components/custom/Navbar"
+// import Navbar from "./components/custom/Navbar"
 import ProductCard from "./components/ProductCard1"
+import Navbar from "./components/custom/Header/Navbar"
 import ProductListing from "./layouts/ProductListing"
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
     <>
       <Navbar />
       <section className="">
-        <ProductListing />
+        {/* <ProductListing /> */}
       </section>
     </>
   )

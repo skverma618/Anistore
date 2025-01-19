@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const Navbar = () => {
+const Navbar2 = () => {
   return (
     <header className='shadow-md bg-white font-[sans-serif] tracking-wide relative z-50'>
       <section
@@ -159,10 +159,9 @@ const Navbar = () => {
           </div>
         </div>
       </section>
-
+      
       <div className='flex flex-wrap justify-center px-10 py-3 relative'>
 
-        
       <div id="collapseMenu"
           className='max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-40 max-lg:before:inset-0 max-lg:before:z-50'>
           <button id="toggleClose" className='lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border'>
@@ -282,4 +281,4 @@ const Navbar = () => {
 
 
 
-export default Navbar;
+export default Navbar2;
