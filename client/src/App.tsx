@@ -33,7 +33,7 @@ function App() {
         { path: 'blog', element: <Blog /> },
         { path: 'about', element: <About /> },
         { path: 'contact', element: <Contact /> },
-        { path: 'loginSignUp', element: <LoginSignUp /> },
+        { path: 'login', element: <LoginSignUp /> },
         { path: 'cart', element: <Cart /> },
       ],
     },
