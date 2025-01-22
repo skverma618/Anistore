@@ -35,6 +35,7 @@ function App() {
         { path: 'contact', element: <Contact /> },
         { path: 'login', element: <LoginSignUp /> },
         { path: 'register', element: <LoginSignUp /> },
+        { path: 'reset', element: <LoginSignUp /> },
         { path: 'cart', element: <Cart /> },
       ],
     },
