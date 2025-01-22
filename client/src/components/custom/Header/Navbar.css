@@ -41,8 +41,7 @@
 .linkContainer ul li a {
   text-decoration: none;
   color: #1b1b1b;
-  font-size: 14px;
-  font-weight: 600;
+  /* font-size: 14px; */
   position: relative;
 }
 
@@ -58,7 +57,7 @@
 }
 
 .linkContainer ul li a:hover::after {
-  width: 60%;
+  width: 86%;
   transition-delay: 0.1s;
 }
 
@@ -146,7 +145,6 @@
 .mobile-menuSearchBarContainer input {
   border: none;
   width: 100%;
-  font-size: 14px;
   outline: none;
 }
 
@@ -171,8 +169,8 @@
 .mobile-menuList ul li a {
   text-decoration: none;
   color: #1b1b1b;
-  font-size: 16px;
-  font-weight: 600;
+  /* font-size: 16px; */
+  /* font-weight: 600; */
 }
 
 .mobile-menuFooter {
@@ -191,8 +189,8 @@
 }
 
 .mobile-menuFooterLogin p {
-  font-size: 14px;
-  font-weight: 600;
+  /* font-size: 14px;
+  font-weight: 600; */
   text-transform: uppercase;
 }
 
@@ -218,7 +216,7 @@
   border: none;
   outline: none;
   background-color: transparent;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 .mobile-menuFooterCurrency {
@@ -231,7 +229,7 @@
   border: none;
   outline: none;
   background-color: transparent;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 .mobile-menuSocial_links {
