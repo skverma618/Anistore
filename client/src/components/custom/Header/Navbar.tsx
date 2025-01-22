@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import "./Navbar.css";
 
 // import logo from "../../Assets/logo.png";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import logo1 from "@/assets/logo1.png";
 
 import { RiMenu2Line } from "react-icons/ri";
 import { FiSearch } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa6";
-// import { RiShoppingBagLine } from "react-icons/ri";
+import { FaRegUserCircle } from "react-icons/fa";
+import { RiShoppingBagLine } from "react-icons/ri";
 import { MdOutlineClose } from "react-icons/md";
 import { FiHeart } from "react-icons/fi";
 
@@ -44,48 +46,47 @@ const Navbar = () => {
       <nav className="navBar">
         <div className="logoLinkContainer">
           <div className="logoContainer">
-            <Link to="/" onClick={scrollToTop}>
-              {/* <img src={logo} alt="Logo" /> */}
-              LOGO
-            </Link>
+            <NavLink to="/" onClick={scrollToTop}>
+              <img src={logo1} alt="Logo" className="w-32" />
+            </NavLink>
           </div>
           <div className="linkContainer">
             <ul>
               <li>
-                <Link to="/" onClick={scrollToTop}>
+                <NavLink to="/" onClick={scrollToTop}>
                   HOME
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/shop" onClick={scrollToTop}>
+                <NavLink to="/shop" onClick={scrollToTop}>
                   SHOP
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/blog" onClick={scrollToTop}>
+                <NavLink to="/blog" onClick={scrollToTop}>
                   BLOG
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/about" onClick={scrollToTop}>
+                <NavLink to="/about" onClick={scrollToTop}>
                   ABOUT
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/contact" onClick={scrollToTop}>
+                <NavLink to="/contact" onClick={scrollToTop}>
                   CONTACT
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>
         </div>
         <div className="iconContainer">
-          <FiSearch size={22} onClick={scrollToTop} />
-          <Link to="/loginSignUp" onClick={scrollToTop}>
-            <FaRegUser size={22} />
-          </Link>
-          <Link to="/cart" onClick={scrollToTop}>
-          C
+          <FiSearch size={18} onClick={scrollToTop} />
+          <NavLink to="/loginSignUp" onClick={scrollToTop}>
+            <FaRegUser size={17} />
+          </NavLink>
+          <NavLink to="/cart" onClick={scrollToTop}>
+            <RiShoppingBagLine size={18} />
             {/* <Badge
               badgeContent={cart.items.length === 0 ? "0" : cart.items.length}
               color="primary"
@@ -94,11 +95,11 @@ const Navbar = () => {
                 horizontal: "right",
               }}
             >
-              <RiShoppingBagLine size={22} />
+              // 
             </Badge> */}
-          </Link>
-          <FiHeart size={22} onClick={scrollToTop} />
-          {/* <RiMenu2Line size={22} /> */}
+          </NavLink>
+          <FiHeart size={18} onClick={scrollToTop} />
+          {/* <RiMenu2Line size={18} /> */}
         </div>
       </nav>
 
@@ -106,18 +107,17 @@ const Navbar = () => {
       <nav>
         <div className="mobile-nav">
           {mobileMenuOpen ? (
-            <MdOutlineClose size={22} onClick={toggleMobileMenu} />
+            <MdOutlineClose size={18} onClick={toggleMobileMenu} />
           ) : (
-            <RiMenu2Line size={22} onClick={toggleMobileMenu} />
+            <RiMenu2Line size={18} onClick={toggleMobileMenu} />
           )}
           <div className="logoContainer">
-            <Link to="/">
-              {/* <img src={logo} alt="Logo" /> */}
-              LOGO
-            </Link>
+            <NavLink to="/">
+            <img src={logo1} alt="Logo" className="w-28" />
+            </NavLink>
           </div>
-          <Link to="/cart">
-          C
+          <NavLink to="/cart">
+            <RiShoppingBagLine size={18} color="black" />
             {/* <Badge
               badgeContent={cart.items.length === 0 ? "0" : cart.items.length}
               color="primary"
@@ -126,46 +126,46 @@ const Navbar = () => {
                 horizontal: "right",
               }}
             >
-              <RiShoppingBagLine size={22} color="black" />
+             
             </Badge> */}
-          </Link>
+          </NavLink>
         </div>
         <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
           <div className="mobile-menuTop">
             <div className="mobile-menuSearchBar">
               <div className="mobile-menuSearchBarContainer">
                 <input type="text" placeholder="Search products" />
-                <Link to="/shop">
-                  <FiSearch size={22} onClick={toggleMobileMenu} />
-                </Link>
+                <NavLink to="/shop">
+                  <FiSearch size={18} onClick={toggleMobileMenu} />
+                </NavLink>
               </div>
             </div>
             <div className="mobile-menuList">
               <ul>
                 <li>
-                  <Link to="/" onClick={toggleMobileMenu}>
+                  <NavLink to="/" onClick={toggleMobileMenu}>
                     HOME
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/shop" onClick={toggleMobileMenu}>
+                  <NavLink to="/shop" onClick={toggleMobileMenu}>
                     SHOP
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/blog" onClick={toggleMobileMenu}>
+                  <NavLink to="/blog" onClick={toggleMobileMenu}>
                     BLOG
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/about" onClick={toggleMobileMenu}>
+                  <NavLink to="/about" onClick={toggleMobileMenu}>
                     ABOUT
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/contact" onClick={toggleMobileMenu}>
+                  <NavLink to="/contact" onClick={toggleMobileMenu}>
                     CONTACT
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -173,10 +173,10 @@ const Navbar = () => {
 
           <div className="mobile-menuFooter">
             <div className="mobile-menuFooterLogin">
-              <Link to="/loginSignUp" onClick={toggleMobileMenu}>
-                <FaRegUser />
+              <NavLink to="/loginSignUp" onClick={toggleMobileMenu}>
+                <FaRegUser size={18} />
                 <p>My Account</p>
-              </Link>
+              </NavLink>
             </div>
             <div className="mobile-menuFooterLangCurrency">
               <div className="mobile-menuFooterLang">
