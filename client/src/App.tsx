@@ -1,7 +1,9 @@
 // import Navbar from "./components/custom/Navbar"
-import ProductCard from "./components/ProductCard1"
+// import ProductCard from "./components/ProductCard1"
 import Navbar from "./components/custom/Header/Navbar"
+import ProductBar from "./components/custom/ProductBar/ProductBar";
 import ProductListing from "./layouts/ProductListing"
+
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 
 function App() {
@@ -28,8 +30,8 @@ function App() {
       path: '/',
       element: <Layout />,
       children: [
-        { path: '/', element: <ProductListing /> },
-        { path: 'shop', element: <Shop /> },
+        { path: '/', element: <ProductBar /> },
+        { path: 'products', element: <ProductListing /> },
         { path: 'blog', element: <Blog /> },
         { path: 'about', element: <About /> },
         { path: 'contact', element: <Contact /> },
