@@ -74,8 +74,8 @@ const ProductBar = () => {
           </div>
           <Swiper
             slidesPerView={5}
-            slidesPerGroup={4}
-            spaceBetween={30}
+            slidesPerGroup={5}
+            spaceBetween={20}
             loop={true}
             navigation={{
               nextEl: ".image-swiper-button-next",
@@ -99,7 +99,7 @@ const ProductBar = () => {
                 spaceBetween: 24,
               },
               1024: {
-                slidesPerView: 4,
+                slidesPerView: 5,
                 slidesPerGroup: 1,
                 spaceBetween: 30,
               },
