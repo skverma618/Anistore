@@ -9,7 +9,8 @@ function ProductCard({ product, handleAddToCart, handleWishlistClick, wishList, 
       <div className="lpImageContainer">
         <Link to="/Product" onClick={scrollToTop}>
           <img
-            src={product?.frontImg}
+            src={product?.frontImg} 
+             
             alt={product?.productName}
             className="lpImage"
           />
