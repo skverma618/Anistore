@@ -9,8 +9,8 @@ function ProductCard({ product, handleAddToCart, handleWishlistClick, wishList, 
       <div className="lpImageContainer">
         <Link to="/Product" onClick={scrollToTop}>
           <img
-            src={product.frontImg}
-            alt={product.productName}
+            src={product?.frontImg}
+            alt={product?.productName}
             className="lpImage"
           />
         </Link>
@@ -28,7 +28,7 @@ function ProductCard({ product, handleAddToCart, handleWishlistClick, wishList, 
         <div className="lpCategoryWishlist">
           <p>Dresses</p>
           <FiHeart
-            onClick={() => handleWishlistClick(product.productID)}
+            onClick={() => handleWishlistClick(product?.productID)}
             style={{
               color: wishList[product.productID] ? "red" : "#767676",
               cursor: "pointer",
@@ -37,9 +37,9 @@ function ProductCard({ product, handleAddToCart, handleWishlistClick, wishList, 
         </div>
         <div className="productNameInfo">
           <Link to="/Product" onClick={scrollToTop}>
-            <h5>{product.productName}</h5>
+            <h5>{product?.productName}</h5>
           </Link>
-          <p>${product.productPrice}</p>
+          <p>${product?.productPrice}</p>
           <div className="productRatingReviews">
             <div className="productRatingStar">
               <FaStar color="#FEC78A" size={10} />
@@ -48,7 +48,7 @@ function ProductCard({ product, handleAddToCart, handleWishlistClick, wishList, 
               <FaStar color="#FEC78A" size={10} />
               <FaStar color="#FEC78A" size={10} />
             </div>
-            <span>{product.productReviews}</span>
+            <span>{product?.productReviews}</span>
           </div>
         </div>
       </div>
