@@ -15,7 +15,7 @@ function ProductCard({ product, handleAddToCart, handleWishlistClick, wishList, 
           />
         </Link>
         <h4 onClick={() => handleAddToCart(product)}>
-          
+          Add to Cart
         </h4>
       </div>
       <div
