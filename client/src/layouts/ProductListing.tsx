@@ -15,7 +15,13 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 
+import { useParams } from "react-router-dom";
+
+
 const ProductListing = () => {
+    const { category, subcategory, subsubcategory } = useParams();
+
+    console.log(category, subcategory, subsubcategory);
     return (
         <SidebarProvider>
             <AppSidebar />
