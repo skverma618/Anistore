@@ -29,9 +29,7 @@ function App() {
         { path: "/", element: <ProductBar /> },
 
         // Routes for categories, subcategories, and sub-subcategories without slashes
-        { path: ":category", element: <ProductListing /> },
-        { path: ":category-:subcategory", element: <ProductListing /> },
-        { path: ":category-:subcategory-:subsubcategory", element: <ProductListing /> },
+        { path: ":productString", element: <ProductListing /> },
 
         // Other pages
         { path: "blog", element: <Blog /> },

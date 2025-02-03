@@ -19,9 +19,9 @@ import { useParams } from "react-router-dom";
 
 
 const ProductListing = () => {
-    const { category, subcategory, subsubcategory } = useParams();
+    const { productString } = useParams();
 
-    console.log(category, subcategory, subsubcategory);
+    console.log(productString);
     return (
         <SidebarProvider>
             <AppSidebar />
