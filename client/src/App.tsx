@@ -1,13 +1,10 @@
-// import Navbar from "./components/custom/Navbar"
-// import ProductCard from "./components/ProductCard1"
-import Navbar from "./components/custom/Header/Navbar"
+import Navbar from "./components/custom/Header/Navbar";
 import ProductBar from "./components/custom/ProductBar/ProductBar";
-import ProductListing from "./layouts/ProductListing"
+import ProductListing from "./layouts/ProductListing";
 
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 function App() {
-
   // Layout Component
   const Layout = () => (
     <div>
@@ -26,24 +23,29 @@ function App() {
   // Define Routes
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <Layout />,
       children: [
-        { path: '/', element: <ProductBar /> },
-        { path: 'products', element: <ProductListing /> },
-        { path: 'blog', element: <Blog /> },
-        { path: 'about', element: <About /> },
-        { path: 'contact', element: <Contact /> },
-        { path: 'login', element: <LoginSignUp /> },
-        { path: 'register', element: <LoginSignUp /> },
-        { path: 'reset', element: <LoginSignUp /> },
-        { path: 'cart', element: <Cart /> },
+        { path: "/", element: <ProductBar /> },
+
+        // Routes for categories, subcategories, and sub-subcategories without slashes
+        { path: ":category", element: <ProductListing /> },
+        { path: ":category-:subcategory", element: <ProductListing /> },
+        { path: ":category-:subcategory-:subsubcategory", element: <ProductListing /> },
+
+        // Other pages
+        { path: "blog", element: <Blog /> },
+        { path: "about", element: <About /> },
+        { path: "contact", element: <Contact /> },
+        { path: "login", element: <LoginSignUp /> },
+        { path: "register", element: <LoginSignUp /> },
+        { path: "reset", element: <LoginSignUp /> },
+        { path: "cart", element: <Cart /> },
       ],
     },
   ]);
-  return (
-    <RouterProvider router={router} />
-  )
+
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
