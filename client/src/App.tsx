@@ -17,7 +17,6 @@ function App() {
   );
 
   // Page Components
-  const Shop = () => <div>Shop Page</div>;
   const Blog = () => <div>Blog Page</div>;
   const About = () => <div>About Page</div>;
   const Contact = () => <div>Contact Page</div>;
