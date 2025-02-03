@@ -20,8 +20,9 @@ import { useParams } from "react-router-dom";
 
 const ProductListing = () => {
     const { productString } = useParams();
+    const [category, subcategory, subsubcategory] = productString?.split("-") || [];
 
-    console.log(productString);
+    console.log(category, subcategory, subsubcategory);
     return (
         <SidebarProvider>
             <AppSidebar />
