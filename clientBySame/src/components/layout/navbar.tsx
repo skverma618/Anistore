@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
 const navigationData = {
   clothing: {
     title: 'Clothing',
-    href: '/clothing',
+    href: '/products?category=clothing',
     subcategories: {
       men: {
         title: 'Men',
@@ -32,7 +32,7 @@ const navigationData = {
   },
   accessories: {
     title: 'Accessories',
-    href: '/accessories',
+    href: '/products?category=accessories',
     subcategories: {
       jewelry: {
         title: 'Jewelry',
@@ -54,7 +54,7 @@ const navigationData = {
   },
   costumes: {
     title: 'Costumes',
-    href: '/costumes',
+    href: '/products?category=costumes',
     subcategories: {
       fullSets: {
         title: 'Full Sets',
@@ -68,7 +68,7 @@ const navigationData = {
   },
   collectiblesDecor: {
     title: 'Collectibles & Decor',
-    href: '/collectibles-decor',
+    href: '/products?category=collectibles-decor',
     subcategories: {
       stickers: {
         title: 'Stickers',
@@ -84,7 +84,7 @@ const navigationData = {
       },
       posters: {
         title: 'Posters & Art',
-        href: '/posters-art',
+        href: '/products?category=collectibles-decor&subcategory=posters',
         subcategories: {
           types: {
             title: 'Types',
@@ -111,7 +111,7 @@ const navigationData = {
   // },
   shopByAnime: {
     title: 'Shop by Anime',
-    href: '/shop-by-anime',
+    href: '/products?anime=all',
     subcategories: {
       popular: {
         title: 'Popular Series',
@@ -130,7 +130,7 @@ const categories = Object.entries(navigationData).map(([key, category]) => ({
 // Extract anime list from navigationData
 const animes = navigationData.shopByAnime.subcategories.popular.items.map(anime => ({
   name: anime,
-  href: `/anime/${anime.toLowerCase().replace(/\s+/g, '-')}`
+  href: `/products?anime=${anime.toLowerCase().replace(/\s+/g, '-')}`
 }));
 
 const Navbar = () => {
@@ -164,7 +164,7 @@ const Navbar = () => {
                             {Object.entries(category.subcategories).map(([subKey, subcategory]) => (
                               <div key={subKey}>
                                 <Link
-                                  href={`${category.href}/${subKey.toLowerCase()}`}
+                                  href={`${category.href}&subcategory=${subKey.toLowerCase()}`}
                                   className="block px-3 py-1 text-sm font-medium hover:text-anime-neonPurple transition"
                                 >
                                   {subcategory.title}
@@ -175,7 +175,7 @@ const Navbar = () => {
                                     {subcategory.items.map((item: string, index: number) => (
                                       <Link
                                         key={index}
-                                        href={`${category.href}/${subKey.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                        href={`${category.href}&subcategory=${subKey.toLowerCase()}&item=${item.toLowerCase().replace(/\s+/g, '-')}`}
                                         className="block px-2 py-1 text-xs hover:text-anime-neonPurple transition"
                                       >
                                         {item}
@@ -203,7 +203,7 @@ const Navbar = () => {
                         </Link>
                       ))}
                       <Link
-                        href="/shop-by-anime"
+                        href="/products?anime=all"
                         className="block px-3 py-1 text-sm text-anime-neonPurple"
                       >
                         View All →
@@ -239,7 +239,7 @@ const Navbar = () => {
                           {Object.entries(category.subcategories).map(([subKey, subcategory]) => (
                             <div key={subKey} className="space-y-2">
                               <Link
-                                href={`${category.href}/${subKey.toLowerCase()}`}
+                                href={`${category.href}&subcategory=${subKey.toLowerCase()}`}
                                 className="text-sm font-medium text-anime-neonPurple hover:underline"
                               >
                                 {subcategory.title}
@@ -250,7 +250,7 @@ const Navbar = () => {
                                   {subcategory.items.map((item: string, index: number) => (
                                     <li key={index}>
                                       <Link
-                                        href={`${category.href}/${subKey.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                        href={`${category.href}&subcategory=${subKey.toLowerCase()}&item=${item.toLowerCase().replace(/\s+/g, '-')}`}
                                         className="text-sm text-gray-600 dark:text-gray-400 hover:text-anime-neonPurple transition-colors"
                                       >
                                         {item}
@@ -352,7 +352,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="/shop-by-anime"
+              href="/products?anime=all"
               className="text-xs whitespace-nowrap text-anime-neonPurple hover:underline"
             >
               View All →
