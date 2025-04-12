@@ -22,28 +22,94 @@ export interface Product {
   reviewCount?: number;
 }
 
-// Sample images (in a real app, these would be actual image paths)
-const sampleImages = [
-  '/images/products/tshirt-naruto.jpg',
-  '/images/products/hoodie-demonslayer.jpg',
-  '/images/products/figure-onepiece.jpg',
-  '/images/products/poster-attackontitan.jpg',
-  '/images/products/sticker-myheroacademia.jpg',
-  '/images/products/costume-demonslayer.jpg',
-  '/images/products/backpack-naruto.jpg',
-  '/images/products/plushie-dragonball.jpg',
-  '/images/products/pillow-jujutsukaisen.jpg',
-  '/images/products/keychain-tokyorevengers.jpg',
-  '/images/products/mug-onepunchman.jpg',
-  '/images/products/hat-blackclover.jpg',
+// Real product images from the assets directory
+const productImages = [
+  '/assets/Products/product_1.jpg',
+  '/assets/Products/product_2.jpg',
+  '/assets/Products/product_3.jpg',
+  '/assets/Products/product_4.jpg',
+  '/assets/Products/product_5.jpg',
+  '/assets/Products/product_6.jpg',
+  '/assets/Products/product_7.jpg',
+  '/assets/Products/product_8.jpg',
 ];
 
-// For demo purposes, we'll use placeholder images
-const getPlaceholderImage = (index: number) => {
-  return `https://placehold.co/600x600/252525/FFFFFF/png?text=Anime+Product+${index + 1}`;
+// Limited edition product images
+const limitedEditionImages = [
+  '/assets/LimitedEdition/limited-1.jpg',
+  '/assets/LimitedEdition/limited-2.jpg',
+  '/assets/LimitedEdition/limited-3.jpg',
+  '/assets/LimitedEdition/limited-4.jpg',
+  '/assets/LimitedEdition/limited-5.jpg',
+];
+
+// Get a product image based on index and whether it's a limited edition
+const getProductImage = (index: number, isLimited: boolean = false) => {
+  if (isLimited) {
+    return limitedEditionImages[index % limitedEditionImages.length];
+  }
+  return productImages[index % productImages.length];
 };
 
-// Generate sample products
+// Anime-specific product names
+const animeProductNames: Record<string, string[]> = {
+  'Naruto': [
+    'Naruto Uzumaki Sage Mode Figure',
+    'Akatsuki Cloud Print Hoodie',
+    'Hidden Leaf Village Headband',
+    'Sasuke Uchiha Sharingan T-Shirt',
+    'Kakashi Hatake Mask',
+    'Nine-Tails Fox Plushie',
+    'Naruto Shippuden Poster Set'
+  ],
+  'One Piece': [
+    'Straw Hat Crew Figurine Collection',
+    'Luffy\'s Straw Hat Replica',
+    'Going Merry Ship Model',
+    'Zoro Three Sword Style T-Shirt',
+    'Devil Fruit Replica Set',
+    'Chopper Plush Backpack',
+    'Wanted Poster Collection'
+  ],
+  'Demon Slayer': [
+    'Tanjiro Kamado Nichirin Sword Replica',
+    'Nezuko Bamboo Muzzle Cosplay Prop',
+    'Water Breathing Technique T-Shirt',
+    'Demon Slayer Corps Uniform',
+    'Zenitsu Lightning Pattern Hoodie',
+    'Inosuke Boar Mask Replica',
+    'Hashira Collection Figure Set'
+  ],
+  'Attack on Titan': [
+    'Survey Corps Jacket',
+    'ODM Gear Replica',
+    'Colossal Titan Figure',
+    'Levi Ackerman Cleaning Set',
+    'Wall Maria Breach Poster',
+    'Eren Titan Form Statue',
+    'Scout Regiment Emblem Patch'
+  ],
+  'My Hero Academia': [
+    'All Might Action Figure',
+    'Deku Full Cowling Hoodie',
+    'U.A. High School Uniform',
+    'Hero License Replica',
+    'Bakugo Explosion Gloves',
+    'Class 1-A Group Poster',
+    'Todoroki Half-Cold Half-Hot T-Shirt'
+  ],
+  'Dragon Ball': [
+    'Super Saiyan Goku Figure',
+    'Dragon Balls Set (7 Pieces)',
+    'Capsule Corp Logo T-Shirt',
+    'Vegeta Saiyan Armor Costume',
+    'Shenron Dragon Statue',
+    'Master Roshi Sunglasses',
+    'Hyperbolic Time Chamber Diorama'
+  ]
+};
+
+// Generate detailed products
 export const products: Product[] = Array.from({ length: 48 }, (_, i) => {
   // Determine category and subcategory
   const categories = ['clothing', 'accessories', 'costumes', 'collectibles-decor'];
@@ -53,32 +119,37 @@ export const products: Product[] = Array.from({ length: 48 }, (_, i) => {
   let subcategory = '';
   let name = '';
   
+  // Determine anime
+  const animes = ['Naruto', 'One Piece', 'Demon Slayer', 'Attack on Titan', 'My Hero Academia', 'Dragon Ball'];
+  const anime = animes[i % animes.length];
+  
   switch (category) {
     case 'clothing':
       const clothingTypes = ['T-Shirts', 'Hoodies', 'Pants', 'Shorts', 'Innerwear'];
       subcategory = clothingTypes[i % clothingTypes.length];
-      name = `${subcategory} - Anime Design ${i + 1}`;
+      // Get anime-specific product name
+      const clothingIndex = i % animeProductNames[anime].length;
+      name = `${anime} ${subcategory} - ${animeProductNames[anime][clothingIndex]}`;
       break;
     case 'accessories':
       const accessoryTypes = ['Jewelry', 'Props', 'Bags', 'Tech Accessories'];
       subcategory = accessoryTypes[i % accessoryTypes.length];
-      name = `${subcategory} - Anime Style ${i + 1}`;
+      const accessoryIndex = (i + 1) % animeProductNames[anime].length;
+      name = `${anime} ${subcategory} - ${animeProductNames[anime][accessoryIndex]}`;
       break;
     case 'costumes':
       const costumeTypes = ['Full Sets', 'Partial Sets', 'Cloaks', 'Robes', 'Shoes'];
       subcategory = costumeTypes[i % costumeTypes.length];
-      name = `${subcategory} - Character Costume ${i + 1}`;
+      const costumeIndex = (i + 2) % animeProductNames[anime].length;
+      name = `${anime} ${subcategory} - ${animeProductNames[anime][costumeIndex]}`;
       break;
     case 'collectibles-decor':
       const collectibleTypes = ['Stickers', 'Toys & Figures', 'Home & Decor', 'Posters & Art'];
       subcategory = collectibleTypes[i % collectibleTypes.length];
-      name = `${subcategory} - Collector's Item ${i + 1}`;
+      const collectibleIndex = (i + 3) % animeProductNames[anime].length;
+      name = `${anime} ${subcategory} - ${animeProductNames[anime][collectibleIndex]}`;
       break;
   }
-  
-  // Determine anime
-  const animes = ['Naruto', 'One Piece', 'Demon Slayer', 'Attack on Titan', 'My Hero Academia', 'Dragon Ball'];
-  const anime = animes[i % animes.length];
   
   // Generate price and potential discount
   const basePrice = 20 + (i % 10) * 5;
@@ -117,7 +188,7 @@ export const products: Product[] = Array.from({ length: 48 }, (_, i) => {
     name,
     price: basePrice,
     originalPrice,
-    image: getPlaceholderImage(i),
+    image: getProductImage(i, isLimited),
     anime,
     category,
     subcategory,
