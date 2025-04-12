@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 270 50% 98%;
+    --foreground: 270 10% 10%;
+
+    --card: 270 50% 96%;
+    --card-foreground: 270 10% 10%;
+
+    --popover: 270 50% 98%;
+    --popover-foreground: 270 10% 10%;
+
+    --primary: 270 80% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 300 80% 75%;
+    --secondary-foreground: 300 10% 10%;
+
+    --muted: 270 50% 92%;
+    --muted-foreground: 270 50% 40%;
+
+    --accent: 320 70% 85%;
+    --accent-foreground: 320 100% 10%;
+
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 270 50% 90%;
+    --input: 270 50% 85%;
+    --ring: 300 80% 60%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 270 50% 5%;
+    --foreground: 270 20% 95%;
+
+    --card: 270 50% 8%;
+    --card-foreground: 270 10% 95%;
+
+    --popover: 270 50% 5%;
+    --popover-foreground: 270 10% 95%;
+
+    --primary: 270 80% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 300 70% 40%;
+    --secondary-foreground: 300 10% 95%;
+
+    --muted: 270 50% 15%;
+    --muted-foreground: 270 50% 70%;
+
+    --accent: 320 70% 25%;
+    --accent-foreground: 320 100% 95%;
+
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 270 50% 20%;
+    --input: 270 50% 25%;
+    --ring: 300 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom anime-themed styles */
+@layer components {
+  .anime-card {
+    @apply relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-lg;
+  }
+
+  .anime-card::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-anime-neonPurple/30 to-anime-deepPurple/20 opacity-0 transition-opacity duration-300;
+  }
+
+  .anime-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .neon-outline {
+    @apply relative;
+    box-shadow: 0 0 5px theme('colors.anime.neonPurple'), 0 0 10px theme('colors.anime.neonPurple');
+  }
+
+  .neon-outline:hover {
+    box-shadow: 0 0 10px theme('colors.anime.neonPurple'), 0 0 20px theme('colors.anime.neonPurple'), 0 0 40px theme('colors.anime.neonPurple');
+  }
+
+  .section-title {
+    @apply relative text-3xl font-bold pb-2 mb-6 inline-block;
+  }
+
+  .section-title::after {
+    @apply content-[''] absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-anime-deepPurple to-anime-neonPurple rounded-full;
+  }
+
+  .hero-gradient {
+    @apply bg-gradient-to-br from-anime-deepPurple via-anime-neonPurple to-anime-black;
+  }
+
+  .katana-divider {
+    @apply relative h-8 my-8 flex items-center justify-center;
+  }
+
+  .katana-divider::before {
+    @apply content-[''] absolute w-full h-[1px] bg-gradient-to-r from-transparent via-anime-goldAccent to-transparent;
+  }
+
+  .float-animation {
+    @apply animate-float;
+  }
+
+  .glow-effect {
+    @apply animate-pulse-glow;
+  }
+
+  .slice-effect {
+    @apply relative overflow-hidden;
+  }
+
+  .slice-effect::after {
+    @apply content-[''] absolute inset-0 bg-anime-neonPurple/20 animate-slice;
+  }
+
+  .anime-tag {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors
+    focus:outline-none focus:ring-2 focus:ring-anime-neonPurple focus:ring-offset-2 select-none;
+  }
+
+  .hot-tag {
+    @apply anime-tag bg-anime-bloodRed text-white;
+  }
+
+  .new-tag {
+    @apply anime-tag bg-anime-electricBlue text-white;
+  }
+
+  .limited-tag {
+    @apply anime-tag bg-anime-goldAccent text-anime-black;
+  }
+}

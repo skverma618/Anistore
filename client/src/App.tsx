@@ -1,5 +1,6 @@
-import Navbar from "./components/custom/Header/Navbar";
+import MegaMenuShadcn from "./components/custom/MegaMenu/MegaMenuShadcn";
 import ProductBar from "./components/custom/ProductBar/ProductBar";
+import PromoSlider from "./components/custom/PromoSlider/PromoSlider";
 import ProductListing from "./layouts/ProductListing";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -8,7 +9,8 @@ function App() {
   // Layout Component
   const Layout = () => (
     <div>
-      <Navbar />
+      <MegaMenuShadcn />
+      <PromoSlider />
       <Outlet />
     </div>
   );
@@ -19,6 +21,8 @@ function App() {
   const Contact = () => <div>Contact Page</div>;
   const LoginSignUp = () => <div>Login/Sign Up Page</div>;
   const Cart = () => <div>Cart Page</div>;
+  const Wishlist = () => <div>Wishlist Page</div>;
+  const Account = () => <div>Account Page</div>;
 
   // Define Routes
   const router = createBrowserRouter([
@@ -26,7 +30,6 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/", element: <ProductBar /> },
 
         // Routes for categories, subcategories, and sub-subcategories without slashes
         { path: ":productString", element: <ProductListing /> },
@@ -39,6 +42,8 @@ function App() {
         { path: "register", element: <LoginSignUp /> },
         { path: "reset", element: <LoginSignUp /> },
         { path: "cart", element: <Cart /> },
+        { path: "wishlist", element: <Wishlist /> },
+        { path: "account", element: <Account /> },
       ],
     },
   ]);

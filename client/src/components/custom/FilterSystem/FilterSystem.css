@@ -1,0 +1,130 @@
+/* FilterSystem.css */
+
+.filter-system {
+  width: 100%;
+  max-width: 300px;
+  background-color: white;
+  border-right: 1px solid #eee;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.filter-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.clear-filters-btn {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.filter-content {
+  padding: 0.5rem 0;
+  overflow-y: auto;
+  max-height: calc(100vh - 60px);
+}
+
+.filter-section {
+  width: 100%;
+}
+
+.filter-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.filter-section-header h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.filter-arrow {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.filter-section-content {
+  padding: 0.5rem 1rem 1rem;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-option label {
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Price range specific styles */
+.price-range-container {
+  padding: 0.5rem 0;
+}
+
+.price-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.price-inputs span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.price-slider {
+  height: 4px;
+}
+
+/* Color filter specific styles */
+.color-options .filter-option {
+  display: flex;
+  align-items: center;
+}
+
+.color-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .filter-system {
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .filter-content {
+    max-height: none;
+  }
+}
