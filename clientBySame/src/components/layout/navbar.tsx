@@ -10,45 +10,128 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-const categories = [
-  {
-    title: 'Home',
-    href: '/',
+// Navigation structure from client MegaMenu
+const navigationData = {
+  clothing: {
+    title: 'Clothing',
+    href: '/clothing',
+    subcategories: {
+      men: {
+        title: 'Men',
+        items: ['T-Shirts', 'Hoodies', 'Pants', 'Shorts', 'Innerwear']
+      },
+      women: {
+        title: 'Women',
+        items: ['Tops', 'Dresses', 'Pants', 'Innerwear']
+      },
+      kids: {
+        title: 'Kids',
+        items: ['T-Shirts', 'Pajamas', 'Hoodies']
+      }
+    }
   },
-  {
-    title: 'Shop',
-    href: '/shop',
-    subcategories: [
-      { title: 'Figurines', href: '/shop/figurines' },
-      { title: 'Clothing', href: '/shop/clothing' },
-      { title: 'Weapons', href: '/shop/weapons' },
-      { title: 'Posters', href: '/shop/posters' },
-      { title: 'Accessories', href: '/shop/accessories' },
-    ],
-  },
-  {
-    title: 'Best Sellers',
-    href: '/best-sellers',
-  },
-  {
-    title: 'Offers',
-    href: '/offers',
-  },
-  {
+  accessories: {
     title: 'Accessories',
     href: '/accessories',
+    subcategories: {
+      jewelry: {
+        title: 'Jewelry',
+        items: ['Earrings', 'Rings']
+      },
+      props: {
+        title: 'Props',
+        items: ['Katanas', 'Headbands']
+      },
+      bags: {
+        title: 'Bags',
+        items: ['Backpacks', 'Sling']
+      },
+      others: {
+        title: 'Others',
+        items: ['Bottles', 'Tech Accessories']
+      }
+    }
   },
-];
+  costumes: {
+    title: 'Costumes',
+    href: '/costumes',
+    subcategories: {
+      fullSets: {
+        title: 'Full Sets',
+        items: ['Men', 'Women', 'Kids']
+      },
+      partialSets: {
+        title: 'Partial Sets',
+        items: ['Cloaks', 'Robes', 'Shoes']
+      }
+    }
+  },
+  collectiblesDecor: {
+    title: 'Collectibles & Decor',
+    href: '/collectibles-decor',
+    subcategories: {
+      stickers: {
+        title: 'Stickers',
+        items: ['Laptop', 'Bottle', 'Wall', 'Others']
+      },
+      toys: {
+        title: 'Toys & Figures',
+        items: ['Plushies', 'Action Figures', 'Collectibles']
+      },
+      homeDecor: {
+        title: 'Home & Decor',
+        items: ['Rugs', 'Pillows', 'Lamps']
+      },
+      posters: {
+        title: 'Posters & Art',
+        href: '/posters-art',
+        subcategories: {
+          types: {
+            title: 'Types',
+            items: ['Wall Posters', 'Magnetic Posters', '3D Posters', 'Scrolls']
+          }
+        }
+      },
+    }
+  },
+  // mangas: {
+  //   title: 'Mangas',
+  //   href: '/mangas',
+  //   subcategories: {
+  //     comingSoon: {
+  //       title: 'Coming Soon',
+  //       items: []
+  //     }
+  //   }
+  // },
+  // combos: {
+  //   title: 'Combos & Merch Boxes',
+  //   href: '/combos-merch-boxes',
+  //   subcategories: {}
+  // },
+  shopByAnime: {
+    title: 'Shop by Anime',
+    href: '/shop-by-anime',
+    subcategories: {
+      popular: {
+        title: 'Popular Series',
+        items: ['Naruto', 'One Piece', 'Demon Slayer', 'Attack on Titan', 'My Hero Academia', 'Dragon Ball']
+      }
+    }
+  }
+};
 
-const animes = [
-  { name: 'One Piece', href: '/anime/one-piece' },
-  { name: 'Naruto', href: '/anime/naruto' },
-  { name: 'Demon Slayer', href: '/anime/demon-slayer' },
-  { name: 'Jujutsu Kaisen', href: '/anime/jujutsu-kaisen' },
-  { name: 'My Hero Academia', href: '/anime/my-hero-academia' },
-  { name: 'Dragon Ball', href: '/anime/dragon-ball' },
-  { name: 'Attack on Titan', href: '/anime/attack-on-titan' },
-];
+// Convert navigationData to an array for easier mapping
+const categories = Object.entries(navigationData).map(([key, category]) => ({
+  ...category,
+  key
+}));
+
+// Extract anime list from navigationData
+const animes = navigationData.shopByAnime.subcategories.popular.items.map(anime => ({
+  name: anime,
+  href: `/anime/${anime.toLowerCase().replace(/\s+/g, '-')}`
+}));
 
 const Navbar = () => {
   return (
@@ -69,23 +152,38 @@ const Navbar = () => {
                   </Link>
                   <nav className="space-y-3">
                     {categories.map((category) => (
-                      <div key={category.title} className="space-y-2">
+                      <div key={category.key} className="space-y-2">
                         <Link
                           href={category.href}
                           className="block px-3 py-2 text-lg font-medium hover:bg-anime-deepPurple/10 rounded-lg transition"
                         >
                           {category.title}
                         </Link>
-                        {category.subcategories && (
-                          <div className="pl-4 space-y-1 border-l-2 border-anime-neonPurple/30 ml-4">
-                            {category.subcategories.map((subcategory) => (
-                              <Link
-                                key={subcategory.title}
-                                href={subcategory.href}
-                                className="block px-3 py-1 text-sm hover:text-anime-neonPurple transition"
-                              >
-                                {subcategory.title}
-                              </Link>
+                        {category.subcategories && Object.keys(category.subcategories).length > 0 && (
+                          <div className="pl-3 space-y-0.5 border-l-2 border-anime-neonPurple/30 ml-3">
+                            {Object.entries(category.subcategories).map(([subKey, subcategory]) => (
+                              <div key={subKey}>
+                                <Link
+                                  href={`${category.href}/${subKey.toLowerCase()}`}
+                                  className="block px-3 py-1 text-sm font-medium hover:text-anime-neonPurple transition"
+                                >
+                                  {subcategory.title}
+                                </Link>
+                                {/* Check if subcategory has items property */}
+                                {'items' in subcategory && subcategory.items && subcategory.items.length > 0 && (
+                                  <div className="pl-2 ml-1 space-y-0.5">
+                                    {subcategory.items.map((item: string, index: number) => (
+                                      <Link
+                                        key={index}
+                                        href={`${category.href}/${subKey.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                        className="block px-2 py-1 text-xs hover:text-anime-neonPurple transition"
+                                      >
+                                        {item}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
                             ))}
                           </div>
                         )}
@@ -104,6 +202,12 @@ const Navbar = () => {
                           {anime.name}
                         </Link>
                       ))}
+                      <Link
+                        href="/shop-by-anime"
+                        className="block px-3 py-1 text-sm text-anime-neonPurple"
+                      >
+                        View All →
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -124,31 +228,44 @@ const Navbar = () => {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               {categories.map((category) => (
-                <NavigationMenuItem key={category.title}>
-                  {category.subcategories ? (
+                <NavigationMenuItem key={category.key}>
+                  {category.subcategories && Object.keys(category.subcategories).length > 0 ? (
                     <>
-                      <NavigationMenuTrigger className="hover:text-anime-neonPurple transition-colors h-10">
+                      <NavigationMenuTrigger className="hover:text-anime-neonPurple transition-colors h-10 data-[state=open]:bg-transparent data-[state=open]:text-anime-neonPurple">
                         {category.title}
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-2">
-                          {category.subcategories.map((subcategory) => (
-                            <li key={subcategory.title} className="row-span-1">
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={subcategory.href}
-                                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                >
-                                  <div className="text-sm font-medium leading-none">{subcategory.title}</div>
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
+                      <NavigationMenuContent className="bg-white dark:bg-gray-950 shadow-md rounded-md border border-gray-200 dark:border-gray-800">
+                        <div className="p-4 grid gap-3 md:w-[600px] lg:w-[700px] lg:grid-cols-3">
+                          {Object.entries(category.subcategories).map(([subKey, subcategory]) => (
+                            <div key={subKey} className="space-y-2">
+                              <Link
+                                href={`${category.href}/${subKey.toLowerCase()}`}
+                                className="text-sm font-medium text-anime-neonPurple hover:underline"
+                              >
+                                {subcategory.title}
+                              </Link>
+                              {/* Check if subcategory has items property */}
+                              {'items' in subcategory && subcategory.items && subcategory.items.length > 0 && (
+                                <ul className="space-y-1">
+                                  {subcategory.items.map((item: string, index: number) => (
+                                    <li key={index}>
+                                      <Link
+                                        href={`${category.href}/${subKey.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                        className="text-sm text-gray-600 dark:text-gray-400 hover:text-anime-neonPurple transition-colors"
+                                      >
+                                        {item}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </NavigationMenuContent>
                     </>
                   ) : (
-                    <Link href={category.href} className="inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:text-anime-neonPurple focus:outline-none focus:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                    <Link href={category.href} className="inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:text-anime-neonPurple focus:outline-none disabled:pointer-events-none disabled:opacity-50">
                       {category.title}
                     </Link>
                   )}
@@ -234,6 +351,12 @@ const Navbar = () => {
                 {anime.name}
               </Link>
             ))}
+            <Link
+              href="/shop-by-anime"
+              className="text-xs whitespace-nowrap text-anime-neonPurple hover:underline"
+            >
+              View All →
+            </Link>
           </div>
         </div>
       </div>
