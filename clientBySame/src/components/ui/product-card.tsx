@@ -71,7 +71,7 @@ const ProductCard = ({
         {/* Product Image */}
         <CardHeader className="p-0 overflow-hidden aspect-square relative">
           <Link href={`/product/${id}`}>
-            <div className="h-full w-full relative group">
+            <div className="h-full w-full absolute group">
               <Image
                 src={image}
                 alt={name}
@@ -99,11 +99,11 @@ const ProductCard = ({
             </span>
           </Link>
           <Link href={`/product/${id}`} className="inline-block mt-1 mb-2">
-            <h3 className="font-bold line-clamp-2 hover:text-anime-neonPurple transition-colors">
+            <h3 className="font-medium text-sm line-clamp-2 hover:text-anime-neonPurple transition-colors">
               {name}
             </h3>
           </Link>
-          <div className="text-sm text-muted-foreground">{category}</div>
+          {/* <div className="text-sm text-muted-foreground">{category}</div> */}
         </CardContent>
 
         <CardFooter className="p-4 pt-0 mt-auto">
