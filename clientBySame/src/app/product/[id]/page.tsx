@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronRight, Heart, ShoppingCart, Star, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ProductImageGallery } from '@/components/product/product-image-gallery';
 import { Badge } from '@/components/ui/badge';
 import { getProductById, Product } from '@/data/products';
 
@@ -74,62 +75,30 @@ export default function ProductPage() {
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
         {/* Product Images */}
-        <div className="space-y-4">
-          {/* Main Image */}
-          <div className="relative aspect-square overflow-hidden rounded-lg border border-anime-deepPurple/20 bg-background">
-            <Image
-              src={selectedImage}
-              alt={product.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            
-            {/* Badges */}
-            <div className="absolute top-2 left-2 z-10 flex flex-col gap-2">
-              {product.isNew && <Badge variant="new">NEW</Badge>}
-              {product.isHot && <Badge variant="hot">HOT</Badge>}
-              {product.isLimited && <Badge variant="limited">LIMITED</Badge>}
-              {product.originalPrice && (
-                <Badge variant="destructive">
-                  -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-                </Badge>
-              )}
-            </div>
-            
-            {/* Wishlist button */}
-            <Button
-              size="icon"
-              variant="ghost"
-              className="absolute top-2 right-2 z-10 rounded-full h-8 w-8 bg-background/80 hover:bg-background hover:text-anime-neonPurple backdrop-blur-sm transition-all border border-anime-deepPurple/20"
-              aria-label="Add to wishlist"
-            >
-              <Heart className="h-4 w-4" />
-            </Button>
-          </div>
-          
-          {/* Thumbnail Images (in a real app, these would be different images) */}
-          <div className="grid grid-cols-5 gap-2">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <button
-                key={index}
-                className={`relative aspect-square overflow-hidden rounded-md border ${
-                  selectedImage === product.image && index === 0
-                    ? 'border-anime-neonPurple'
-                    : 'border-anime-deepPurple/20 hover:border-anime-neonPurple/50'
-                }`}
-                onClick={() => setSelectedImage(product.image)}
-              >
-                <Image
-                  src={product.image}
-                  alt={`${product.name} thumbnail ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 20vw, 10vw"
-                />
-              </button>
-            ))}
-          </div>
+        <div>
+          <ProductImageGallery
+            images={[
+              product.image,
+              // Create variant image path by inserting "-1" before the file extension
+              product.image.replace('.jpg', '-1.jpg'),
+              // Add some other product images to demonstrate the slider functionality
+              '/assets/products/naruto_keychains.jpg',
+              '/assets/products/one_piece_luffy_poster.jpeg',
+              '/assets/products/demon_slayer_shinobu_cosplay_costume.jpeg',
+              '/assets/products/nezuko_figurine1.avif',
+              '/assets/products/forger_figurine1.webp',
+              '/assets/products/jjk_crocs_accessories.webp'
+            ]}
+            productName={product.name}
+            badges={{
+              isNew: product.isNew,
+              isHot: product.isHot,
+              isLimited: product.isLimited,
+              discountPercentage: product.originalPrice
+                ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+                : undefined
+            }}
+          />
         </div>
         
         {/* Product Info */}

@@ -24,14 +24,23 @@ export interface Product {
 
 // Real product images from the assets directory
 const productImages = [
-  '/assets/Products/product_1.jpg',
-  '/assets/Products/product_2.jpg',
-  '/assets/Products/product_3.jpg',
-  '/assets/Products/product_4.jpg',
-  '/assets/Products/product_5.jpg',
-  '/assets/Products/product_6.jpg',
-  '/assets/Products/product_7.jpg',
-  '/assets/Products/product_8.jpg',
+  '/assets/products/5-naruto-anime-action-figures-set-pvc-cake-decorating-items-original-imagfff9rputkkr2.webp',
+  '/assets/products/akame_ga_kill_scroll_poster.jpg',
+  '/assets/products/anime-unisex-regular-itachi-quote-black-t-shirt-2023-product-images-rvkeunghn2-0-202301281426.jpeg',
+  '/assets/products/chubby_naruto_laptop_skin.webp',
+  '/assets/products/chuppy_naruto_iphone_skin.jpeg',
+  '/assets/products/demon_slayer_shinobu_cosplay_costume.jpeg',
+  '/assets/products/forger_figurine1.webp',
+  '/assets/products/jjk_crocs_accessories.webp',
+  '/assets/products/naruto_keychains.jpg',
+  '/assets/products/nezuko_figurine1.avif',
+  '/assets/products/nezuko_figurine2.avif',
+  '/assets/products/one_piece_luffy_poster.jpeg',
+  '/assets/products/one_piece_stickers.jpeg',
+  '/assets/products/one_piece_wallet.jpeg',
+  '/assets/products/redwolf_naruto_merch_sweatshirt.webp',
+  '/assets/products/slime_pillow_set.jpeg',
+  '/assets/products/spy_family_pant_hooks.jpg',
 ];
 
 // Limited edition product images
