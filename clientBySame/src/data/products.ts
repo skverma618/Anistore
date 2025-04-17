@@ -9,7 +9,7 @@ export interface Product {
   image: string;
   anime: string;
   category: string;
-  subcategory: string;
+  subcategory?: string;
   gender?: string;
   size?: string[];
   color?: string[];
@@ -216,16 +216,15 @@ export const getProductsByCategory = (category: string, subcategory?: string, it
   let filteredProducts = products.filter(product => 
     product.category.toLowerCase() === category.toLowerCase()
   );
-  
   if (subcategory) {
-    filteredProducts = filteredProducts.filter(product => 
-      product.subcategory.toLowerCase().includes(subcategory.toLowerCase())
+    filteredProducts = filteredProducts.filter(product =>
+      product.subcategory?.toLowerCase().includes(subcategory.toLowerCase())
     );
   }
   
   // Further filter by specific item if provided
   if (item) {
-    filteredProducts = filteredProducts.filter(product => 
+    filteredProducts = filteredProducts.filter(product =>
       product.name.toLowerCase().includes(item.toLowerCase())
     );
   }

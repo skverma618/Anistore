@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import { StoreProvider } from "@/contexts/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
 
@@ -20,14 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body className="min-h-screen font-body antialiased">
-        <div className="relative flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
+        <StoreProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </div>
+          <Toaster />
+        </StoreProvider>
       </body>
     </html>
   );

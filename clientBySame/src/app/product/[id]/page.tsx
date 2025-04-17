@@ -9,6 +9,9 @@ import { Button } from '@/components/ui/button';
 import { ProductImageGallery } from '@/components/product/product-image-gallery';
 import { Badge } from '@/components/ui/badge';
 import { getProductById, Product } from '@/data/products';
+import { useCart } from '@/contexts/CartContext';
+import { useWishlist } from '@/contexts/WishlistContext';
+import { toast } from 'sonner';
 
 export default function ProductPage() {
   const params = useParams();
@@ -25,11 +28,42 @@ export default function ProductPage() {
   const [selectedImage, setSelectedImage] = useState(product.image);
   const [quantity, setQuantity] = useState(1);
   
+  const { addToCart } = useCart();
+  const { addToWishlist, isInWishlist, removeFromWishlist } = useWishlist();
+  
   // Handle quantity change
   const handleQuantityChange = (amount: number) => {
     const newQuantity = quantity + amount;
     if (newQuantity >= 1 && newQuantity <= 10) {
       setQuantity(newQuantity);
+    }
+  };
+  
+  // Handle add to cart
+  const handleAddToCart = () => {
+    console.log('Add to cart clicked on product page:', product.name);
+    
+    if (!product.isSoldOut) {
+      // Make sure all required properties are included
+      const completeProduct: Product = {
+        ...product,
+        subcategory: product.subcategory || '',
+        rating: product.rating || 5,
+        reviewCount: product.reviewCount || 0
+      };
+      
+      console.log('Product to add from product page:', completeProduct);
+      addToCart(completeProduct, quantity);
+      toast.success(`Added ${quantity} ${quantity > 1 ? 'items' : 'item'} to cart`);
+    }
+  };
+  
+  // Handle wishlist toggle
+  const handleWishlistToggle = () => {
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
     }
   };
   
@@ -169,8 +203,8 @@ export default function ProductPage() {
             {/* Subcategory */}
             <div className="flex items-center">
               <span className="w-24 text-sm font-medium">Type:</span>
-              <Link 
-                href={`/products?category=${product.category}&subcategory=${product.subcategory.toLowerCase()}`}
+              <Link
+                href={`/products?category=${product.category}&subcategory=${product.subcategory?.toLowerCase()}`}
                 className="text-sm hover:text-anime-neonPurple transition-colors"
               >
                 {product.subcategory}
@@ -250,17 +284,19 @@ export default function ProductPage() {
               size="lg"
               className="flex-1 bg-anime-deepPurple hover:bg-anime-neonPurple"
               disabled={product.isSoldOut}
+              onClick={handleAddToCart}
             >
               <ShoppingCart className="h-5 w-5 mr-2" />
               {product.isSoldOut ? "Sold Out" : "Add to Cart"}
             </Button>
             <Button
               size="lg"
-              variant="outline"
-              className="flex-1"
+              variant={isInWishlist(product.id) ? "default" : "outline"}
+              className={`flex-1 ${isInWishlist(product.id) ? "bg-anime-electricBlue hover:bg-anime-electricBlue/90" : ""}`}
+              onClick={handleWishlistToggle}
             >
-              <Heart className="h-5 w-5 mr-2" />
-              Add to Wishlist
+              <Heart className={`h-5 w-5 mr-2 ${isInWishlist(product.id) ? "fill-white" : ""}`} />
+              {isInWishlist(product.id) ? "In Wishlist" : "Add to Wishlist"}
             </Button>
           </div>
           
@@ -300,9 +336,9 @@ export default function ProductPage() {
               quality and attention to detail.
             </p>
             <p>
-              Crafted with high-quality materials, this {product.subcategory} features authentic 
-              designs that stay true to the {product.anime} universe. Whether you're adding to your 
-              collection or looking for the perfect gift for an anime fan, this product delivers 
+              Crafted with high-quality materials, this {product.subcategory || 'item'} features authentic
+              designs that stay true to the {product.anime} universe. Whether you're adding to your
+              collection or looking for the perfect gift for an anime fan, this product delivers
               exceptional value.
             </p>
             <p>

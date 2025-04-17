@@ -16,7 +16,10 @@ const featuredProducts = [
     image: "/assets/products/one_piece_wallet.jpeg",
     anime: "One Piece",
     category: "Weapon Replicas",
+    subcategory: "Katanas",
     isHot: true,
+    rating: 4.8,
+    reviewCount: 42
   },
   {
     id: "product2",
@@ -25,7 +28,10 @@ const featuredProducts = [
     image: "/assets/products/anime-unisex-regular-itachi-quote-black-t-shirt-2023-product-images-rvkeunghn2-0-202301281426.jpeg",
     anime: "Naruto",
     category: "Clothing",
+    subcategory: "Hoodies",
     isNew: true,
+    rating: 4.5,
+    reviewCount: 28
   },
   {
     id: "product3",
@@ -35,7 +41,10 @@ const featuredProducts = [
     image: "/assets/products/nezuko_figurine1.avif",
     anime: "Demon Slayer",
     category: "Figurines",
+    subcategory: "Action Figures",
     isLimited: true,
+    rating: 5.0,
+    reviewCount: 56
   },
   {
     id: "product4",
@@ -44,7 +53,10 @@ const featuredProducts = [
     image: "/assets/products/jjk_crocs_accessories.webp",
     anime: "My Hero Academia",
     category: "Footwear",
+    subcategory: "Sneakers",
     isSoldOut: true,
+    rating: 4.7,
+    reviewCount: 19
   },
 ];
 
