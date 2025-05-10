@@ -4,7 +4,10 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import { Heart, ShoppingCart } from 'lucide-react';
+import { useCart } from '@/contexts/CartContext';
+import { useWishlist } from '@/contexts/WishlistContext';
+import { Product } from '@/data/products';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,6 +20,7 @@ export interface ProductCardProps {
   image: string;
   anime: string;
   category: string;
+  subcategory?: string;
   isNew?: boolean;
   isHot?: boolean;
   isLimited?: boolean;
@@ -31,15 +35,70 @@ const ProductCard = ({
   image,
   anime,
   category,
+  subcategory,
   isNew = false,
   isHot = false,
   isLimited = false,
   isSoldOut = false,
 }: ProductCardProps) => {
+  const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  
   // Calculate discount percentage if there's an original price
   const discountPercentage = originalPrice
     ? Math.round(((originalPrice - price) / originalPrice) * 100)
     : 0;
+    
+  const handleAddToCart = () => {
+    console.log('Add to cart clicked for:', name);
+    
+    // Create a complete product object with all required fields
+    const product: Product = {
+      id,
+      name,
+      price,
+      originalPrice,
+      image,
+      anime,
+      category,
+      subcategory: subcategory || '', // Provide default value for potentially missing properties
+      isNew,
+      isHot,
+      isLimited,
+      isSoldOut,
+      rating: 5, // Default rating if not provided
+      reviewCount: 0 // Default review count if not provided
+    };
+    
+    console.log('Product to add:', product);
+    addToCart(product);
+  };
+  
+  const handleWishlistToggle = () => {
+    // Create a complete product object with all required fields
+    const product: Product = {
+      id,
+      name,
+      price,
+      originalPrice,
+      image,
+      anime,
+      category,
+      subcategory: subcategory || '', // Provide default value for potentially missing properties
+      isNew,
+      isHot,
+      isLimited,
+      isSoldOut,
+      rating: 5, // Default rating if not provided
+      reviewCount: 0 // Default review count if not provided
+    };
+    
+    if (isInWishlist(id)) {
+      removeFromWishlist(id);
+    } else {
+      addToWishlist(product);
+    }
+  };
 
   return (
     <motion.div
@@ -62,16 +121,19 @@ const ProductCard = ({
         <Button
           size="icon"
           variant="ghost"
-          className="absolute top-2 right-2 z-10 rounded-full h-8 w-8 bg-background/80 hover:bg-background hover:text-anime-neonPurple backdrop-blur-sm transition-all border border-anime-deepPurple/20"
-          aria-label="Add to wishlist"
+          className={`absolute top-2 right-2 z-10 rounded-full h-8 w-8 bg-background/80 hover:bg-background backdrop-blur-sm transition-all border border-anime-deepPurple/20 ${
+            isInWishlist(id) ? 'text-anime-bloodRed hover:text-anime-bloodRed' : 'hover:text-anime-neonPurple'
+          }`}
+          aria-label={isInWishlist(id) ? "Remove from wishlist" : "Add to wishlist"}
+          onClick={handleWishlistToggle}
         >
-          <Heart className="h-4 w-4" />
+          <Heart className="h-4 w-4" fill={isInWishlist(id) ? "currentColor" : "none"} />
         </Button>
 
         {/* Product Image */}
         <CardHeader className="p-0 overflow-hidden aspect-square relative">
           <Link href={`/product/${id}`}>
-            <div className="h-full w-full relative group">
+            <div className="h-full w-full absolute group">
               <Image
                 src={image}
                 alt={name}
@@ -99,11 +161,11 @@ const ProductCard = ({
             </span>
           </Link>
           <Link href={`/product/${id}`} className="inline-block mt-1 mb-2">
-            <h3 className="font-bold line-clamp-2 hover:text-anime-neonPurple transition-colors">
+            <h3 className="font-medium text-sm line-clamp-2 hover:text-anime-neonPurple transition-colors">
               {name}
             </h3>
           </Link>
-          <div className="text-sm text-muted-foreground">{category}</div>
+          {/* <div className="text-sm text-muted-foreground">{category}</div> */}
         </CardContent>
 
         <CardFooter className="p-4 pt-0 mt-auto">
@@ -122,8 +184,14 @@ const ProductCard = ({
               size="sm"
               disabled={isSoldOut}
               className={isSoldOut ? "opacity-50 cursor-not-allowed" : "bg-anime-deepPurple hover:bg-anime-neonPurple"}
+              onClick={handleAddToCart}
             >
-              {isSoldOut ? "Sold Out" : "Add to Cart"}
+              {isSoldOut ? "Sold Out" : (
+                <span className="flex items-center gap-1">
+                  <ShoppingCart className="h-3.5 w-3.5" />
+                  Add to Cart
+                </span>
+              )}
             </Button>
           </div>
         </CardFooter>

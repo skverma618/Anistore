@@ -22,7 +22,10 @@ const animeData = [
         image: "https://cdn11.bigcommerce.com/s-iut5ld55uy/images/stencil/1280x1280/products/35735/171161/SS3140_01__11745.1706628740.jpg",
         anime: "One Piece",
         category: "Weapon Replicas",
+        subcategory: "Katanas",
         isHot: true,
+        rating: 4.9,
+        reviewCount: 65
       },
       {
         id: "one-piece-2",
@@ -31,7 +34,10 @@ const animeData = [
         image: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/03/best-anime-collectibles.jpg",
         anime: "One Piece",
         category: "Accessories",
+        subcategory: "Hats",
         isNew: true,
+        rating: 4.7,
+        reviewCount: 42
       },
       {
         id: "one-piece-3",
@@ -40,6 +46,9 @@ const animeData = [
         image: "https://i5.walmartimages.com/seo/Sanrio-Anime-Figure-6Cm-Christmas-Hat-Cinnamoroll-Bear-Figurines-Collectibles-Kawaii-Doll-Toys-Send-A-Gifts-For-Childrens_8d60ec0e-52a6-4743-b1a6-d8dd0b5f6f0f.81ca0704859e014cc339bdd5738e5b40.jpeg",
         anime: "One Piece",
         category: "Plushies",
+        subcategory: "Character Plushies",
+        rating: 4.8,
+        reviewCount: 37
       },
     ]
   },
@@ -55,7 +64,10 @@ const animeData = [
         image: "https://m.media-amazon.com/images/I/61ZGv25IqdL._AC_UY1000_.jpg",
         anime: "Naruto",
         category: "Clothing",
+        subcategory: "Hoodies",
         isLimited: true,
+        rating: 4.6,
+        reviewCount: 53
       },
       {
         id: "naruto-2",
@@ -65,6 +77,9 @@ const animeData = [
         image: "https://i.ebayimg.com/images/g/1MMAAOSw97RgWfdU/s-l400.jpg",
         anime: "Naruto",
         category: "Weapon Replicas",
+        subcategory: "Ninja Tools",
+        rating: 4.5,
+        reviewCount: 28
       },
       {
         id: "naruto-3",
@@ -73,7 +88,10 @@ const animeData = [
         image: "https://360assetadvisors.com/wp-content/uploads/2023/08/UKFeature2.png",
         anime: "Naruto",
         category: "Figurines",
+        subcategory: "Action Figures",
         isHot: true,
+        rating: 4.9,
+        reviewCount: 47
       },
     ]
   },
@@ -89,7 +107,10 @@ const animeData = [
         image: "https://i.etsystatic.com/26622078/r/il/84b60f/3134063687/il_570xN.3134063687_9qaf.jpg",
         anime: "Demon Slayer",
         category: "Weapon Replicas",
+        subcategory: "Swords",
         isNew: true,
+        rating: 4.8,
+        reviewCount: 32
       },
       {
         id: "demon-slayer-2",
@@ -98,6 +119,9 @@ const animeData = [
         image: "https://m.media-amazon.com/images/I/61hJi82i-xL._AC_UF1000,1000_QL80_.jpg",
         anime: "Demon Slayer",
         category: "Home Decor",
+        subcategory: "Lighting",
+        rating: 4.6,
+        reviewCount: 24
       },
       {
         id: "demon-slayer-3",
@@ -107,7 +131,10 @@ const animeData = [
         image: "https://images.ontheedgebrands.com/cdn-cgi/image/f=auto,height=1000,width=1000,quality=75/images/a35-bk6233/miniature-anime-sword-tengen-uzui-replica-with-stand.jpg",
         anime: "Demon Slayer",
         category: "Collectibles",
+        subcategory: "Figure Sets",
         isLimited: true,
+        rating: 5.0,
+        reviewCount: 18
       },
     ]
   },
@@ -123,7 +150,10 @@ const animeData = [
         image: "https://m.media-amazon.com/images/I/71JsXCwmC-L._AC_UF894,1000_QL80_.jpg",
         anime: "Jujutsu Kaisen",
         category: "Collectibles",
+        subcategory: "Prop Replicas",
         isLimited: true,
+        rating: 4.7,
+        reviewCount: 29
       },
       {
         id: "jujutsu-2",
@@ -132,7 +162,10 @@ const animeData = [
         image: "https://images.ontheedgebrands.com/cdn-cgi/image/f=auto,height=1000,width=1000,quality=75/images/d35-bk6233/demon-slayer-miniature-sword-dimensions.jpg",
         anime: "Jujutsu Kaisen",
         category: "Accessories",
+        subcategory: "Cosplay Items",
         isHot: true,
+        rating: 4.8,
+        reviewCount: 41
       },
       {
         id: "jujutsu-3",
@@ -142,6 +175,9 @@ const animeData = [
         image: "https://360assetadvisors.com/wp-content/uploads/2023/08/UKFeature2.png",
         anime: "Jujutsu Kaisen",
         category: "Wall Art",
+        subcategory: "Posters",
+        rating: 4.5,
+        reviewCount: 36
       },
     ]
   },
